@@ -128,6 +128,17 @@ class DateTime {
         return DateTime::format_datetime(DateTime::$sql_format_time, $time, 'PhangoApp\PhaTime\substract_utc');
     
     }
+    
+    /**
+    * This method extracs a YYYYmmddhhmmss in localtime
+    */
+    
+    static public function gmt_to_local($time)
+    {
+    
+        return DateTime::format_datetime(DateTime::$sql_format_time, $time, 'PhangoApp\PhaTime\sum_utc');
+    
+    }
 
     /**
     * This method format a YYYYmmddhhmmss UTC time
