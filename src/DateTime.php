@@ -65,7 +65,7 @@ class DateTime {
     }
     
     /**
-    * This method extracs a YYYYmmddhhmmss in localtime
+    * This method extracs a YYYYmmddhhmmss in localtime timestamp
     */
     
     static public function obtain_timestamp($time)
@@ -89,13 +89,13 @@ class DateTime {
     }
     
     /**
-    * Method for obtain the timestamp a obtain a valid formatted date
+    * Method for get the timestamp from YYYYmmddhhmmss and obtain a valid formatted date
     */
     
-    static public function format_datetime($format, $timestamp, $func_utc_return)
+    static public function format_datetime($format, $time_to_format, $func_utc_return)
     {
     
-        $timestamp=DateTime::obtain_timestamp($timestamp);
+        $timestamp=DateTime::obtain_timestamp($time_to_format);
         
         if($timestamp)
         {
@@ -119,7 +119,34 @@ class DateTime {
     }
     
     /**
-    * This method extracs a YYYYmmddhhmmss in UTC
+    * Method for get YYYYmmddhhmmss from localtime timestamp
+    */
+    
+    static public function format_timestamp($timestamp, $localtime=false)
+    {
+        
+        $func_utc_return='PhangoApp\PhaTime\substract_utc';
+        
+        if($localtime)
+        {
+        
+            $func_utc_return='PhangoApp\PhaTime\sum_utc';
+             
+        }
+        
+        
+        $offset=date("Z");
+        
+        $timestamp=$func_utc_return($timestamp, $offset); 
+        
+        # Return utc
+        
+        return date(DateTime::$sql_format_time, $timestamp);
+    
+    }
+    
+    /**
+    * This method convert a YYYYmmddhhmmss to UTC
     */
     
     static public function local_to_gmt($time)
@@ -130,7 +157,7 @@ class DateTime {
     }
     
     /**
-    * This method extracs a YYYYmmddhhmmss in localtime
+    * This method convert a YYYYmmddhhmmss to localtime
     */
     
     static public function gmt_to_local($time)
@@ -141,7 +168,7 @@ class DateTime {
     }
 
     /**
-    * This method format a YYYYmmddhhmmss UTC time
+    * This method format a YYYYmmddhhmmss UTC time to local time
     */
     
     static public function format_time($time)
@@ -152,7 +179,7 @@ class DateTime {
     }
     
     /**
-    * This method format a YYYYmmddhhmmss UTC date
+    * This method format a YYYYmmddhhmmss UTC date to local date
     */
     
     static public function format_date($time)
