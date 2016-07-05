@@ -189,6 +189,17 @@ class DateTime {
     
     }
     
+    /**
+    * This method format a YYYYmmddhhmmss UTC date to local datetime
+    */
+    
+    static public function format_fulldate($time)
+    {
+    
+        return DateTime::format_datetime(DateTime::$format_date.' '.DateTime::$format_time, $time, 'PhangoApp\PhaTime\sum_utc');
+    
+    }
+    
 
 }
 
