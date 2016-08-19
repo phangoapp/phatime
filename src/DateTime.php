@@ -5,7 +5,7 @@ namespace PhangoApp\PhaTime;
 class DateTime {
 
     /**
-    * Basic format for 
+    * Basic format for dates
     */
 
     static public $sql_format_time='YmdHis';
