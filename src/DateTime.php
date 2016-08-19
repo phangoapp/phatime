@@ -94,13 +94,17 @@ class DateTime {
     
     static public function format_datetime($format, $time_to_format, $func_utc_return)
     {
-    
+        
         $timestamp=DateTime::obtain_timestamp($time_to_format);
         
         if($timestamp)
         {
-        
-            $offset=date("Z");
+            
+            $timeclass = new \DateTime(substr($time_to_format, 0, 8), new \DateTimeZone(DateTime::$timezone));
+            
+            $offset=$timeclass->getOffset();
+            
+            #$offset=date("Z", $timestamp);
             
             $timestamp=$func_utc_return($timestamp, $offset); 
             
