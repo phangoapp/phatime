@@ -139,13 +139,28 @@ class DateTime {
         }
         
         
-        $offset=date("Z");
+        $timestamp=DateTime::obtain_timestamp($time_to_format);
         
-        $timestamp=$func_utc_return($timestamp, $offset); 
+        if($timestamp)
+        {
         
-        # Return utc
-        
-        return date(DateTime::$sql_format_time, $timestamp);
+            $timeclass = new \DateTime(substr($time_to_format, 0, 8), new \DateTimeZone(DateTime::$timezone));
+                
+            $offset=$timeclass->getOffset();
+            
+            $timestamp=$func_utc_return($timestamp, $offset); 
+            
+            # Return utc
+            
+            return date(DateTime::$sql_format_time, $timestamp);
+            
+        }
+        else
+        {
+            
+            return false;
+            
+        }
     
     }
     
@@ -202,6 +217,17 @@ class DateTime {
     
         return DateTime::format_datetime(DateTime::$format_date.' '.DateTime::$format_time, $time, 'PhangoApp\PhaTime\sum_utc');
     
+    }
+    
+    /**
+    * Method for get now date
+    */
+    
+    static public function now($localtime=false)
+    {
+        
+        return DateTime::format_timestamp($timestamp, $localtime);
+        
     }
     
 
