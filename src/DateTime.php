@@ -126,10 +126,10 @@ class DateTime {
     * Method for get YYYYmmddhhmmss from localtime timestamp
     */
     
-    static public function format_timestamp($timestamp, $localtime=false)
+    static public function format_timestamp($timestamp, $localtime=true)
     {
         
-        $func_utc_return='PhangoApp\PhaTime\substract_utc';
+        /*$func_utc_return='PhangoApp\PhaTime\substract_utc';
         
         if($localtime)
         {
@@ -148,19 +148,30 @@ class DateTime {
                 
             $offset=$timeclass->getOffset();
             
-            $timestamp=$func_utc_return($timestamp, $offset); 
+            $timestamp=$func_utc_return($timestamp, $offset); */
             
             # Return utc
             
-            return date(DateTime::$sql_format_time, $timestamp);
+            if($localtime)
+            {
             
-        }
+                return date(DateTime::$sql_format_time, $timestamp);
+                
+            }
+            else
+            {
+                
+                return gmdate(DateTime::$sql_format_time, $timestamp);
+                
+            }
+            
+        /*}
         else
         {
             
             return false;
             
-        }
+        }*/
     
     }
     
@@ -220,12 +231,14 @@ class DateTime {
     }
     
     /**
-    * Method for get now date
+    * Method for get now local or utc date
     */
     
-    static public function now($localtime=false)
+    static public function now($localtime=true)
     {
-        
+        //Get localtime
+        $timestamp=time();
+                
         return DateTime::format_timestamp($timestamp, $localtime);
         
     }
