@@ -231,6 +231,17 @@ class DateTime {
     }
     
     /**
+    * This method format a YYYYmmddhhmmss UTC date to local date with your selected format
+    */
+    
+    static public function format($time, $selected_format)
+    {
+    
+        return DateTime::format_datetime($selected_format, $time, 'PhangoApp\PhaTime\sum_utc');
+    
+    }
+    
+    /**
     * Method for get now local or utc date
     */
     
