@@ -21,10 +21,10 @@ class DateTimeNow {
     static public function update_datetime()
     {
     
-        DateTimeNow::$today=DateTime::format(DateTime::now(true), 'His');
-        DateTimeNow::$today_first=DateTime::format(DateTime::now(true), 'Ymd000000');
-        DateTimeNow::$today_last=DateTime::format(DateTime::now(true), 'Ymd235959');
-        DateTimeNow::$today_hour=DateTime::format(DateTime::now(true), 'H0000');
+        DateTimeNow::$today=DateTime::format(DateTime::now(false), 'His');
+        DateTimeNow::$today_first=DateTime::format(DateTime::now(false), 'Ymd000000');
+        DateTimeNow::$today_last=DateTime::format(DateTime::now(false), 'Ymd235959');
+        DateTimeNow::$today_hour=DateTime::format(DateTime::now(false), 'H0000');
     
     }
     
